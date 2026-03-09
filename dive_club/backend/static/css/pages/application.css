@@ -1,0 +1,245 @@
+/* ========================================
+   СТРАНИЦА ЗАЯВКИ (application.css)
+   ======================================== */
+
+/* --- Контейнер формы --- */
+.application-form-section {
+    padding: 60px 20px;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--glass-effect);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.form-container h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.form-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* --- Стили формы Django --- */
+.form-container form {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    max-width: 100%;
+}
+
+.form-container form p {
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="tel"],
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 15px rgba(255,111,97,0.3);
+}
+
+.form-container textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+/* --- Кнопка отправки --- */
+.form-container button[type="submit"] {
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-container button[type="submit"]:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255,111,97,0.4);
+}
+
+/* --- Ошибки формы --- */
+.form-container .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    background: rgba(255,107,107,0.1);
+    padding: 10px 15px;
+    border-radius: 10px;
+    border-left: 3px solid #ff6b6b;
+}
+
+.form-container .errorlist li {
+    margin-bottom: 5px;
+}
+
+.form-container .errorlist:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Уведомления --- */
+#notification {
+    max-width: 600px;
+    margin: 30px auto 0 auto;
+    padding: 20px 30px;
+    border-radius: 15px;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 600;
+    animation: slideInDown 0.5s ease-out;
+    border: 1px solid;
+}
+
+#notification.success {
+    background-color: rgba(212, 237, 218, 0.2);
+    color: #81c784;
+    border-color: #81c784;
+    backdrop-filter: blur(10px);
+}
+
+#notification.error {
+    background-color: rgba(248, 215, 218, 0.2);
+    color: #e57373;
+    border-color: #e57373;
+    backdrop-filter: blur(10px);
+}
+
+/* --- Фоновая анимация --- */
+.application-form-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        var(--primary-color),
+        var(--secondary-color),
+        var(--accent-color)
+    );
+    opacity: 0.1;
+    z-index: -1;
+    animation: gradientBackground 10s infinite alternate;
+}
+
+@keyframes gradientBackground {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+    .application-form-section {
+        padding: 40px 15px;
+    }
+
+    .form-container {
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    .form-container h1 {
+        font-size: 2rem;
+    }
+
+    .form-container input,
+    .form-container textarea,
+    .form-container select {
+        font-size: 0.95rem;
+        padding: 12px 15px;
+    }
+
+    .form-container button[type="submit"] {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 25px 15px;
+    }
+
+    .form-container h1 {
+        font-size: 1.6rem;
+    }
+
+    #notification {
+        margin: 20px 10px 0 10px;
+        padding: 15px 20px;
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,205 @@
+/* ========================================
+   СТРАНИЦА МЕРОПРИЯТИЯ (event_detail.css)
+   ======================================== */
+
+/* --- Секция мероприятия --- */
+.event-detail {
+    padding: 60px 20px;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.event-detail .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Кнопка назад --- */
+.event-detail .back-button {
+    display: inline-block;
+    margin-bottom: 30px;
+    padding: 12px 24px;
+    background: var(--accent-color);
+    color: var(--text-color);
+    border-radius: 25px;
+    font-weight: 600;
+    transition: var(--transition-fast);
+    border: none;
+    cursor: pointer;
+}
+
+.event-detail .back-button:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+/* --- Заголовок мероприятия --- */
+.event-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.event-header h2 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.event-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* --- Описание мероприятия --- */
+.event-description {
+    background: var(--glass-effect);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 40px;
+}
+
+.event-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* --- Галерея изображений --- */
+.event-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.event-image-wrapper {
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.event-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform .5s;
+    display: block;
+}
+
+.event-image-wrapper:hover .event-image {
+    transform: scale(1.1);
+}
+
+/* --- Сообщение если нет изображений --- */
+.event-images p {
+    text-align: center;
+    padding: 40px;
+    background: var(--glass-effect);
+    border-radius: 20px;
+    opacity: 0.8;
+    grid-column: 1 / -1;
+}
+
+/* --- Фоновая анимация --- */
+.event-detail::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        var(--primary-color),
+        var(--secondary-color),
+        var(--accent-color)
+    );
+    opacity: 0.1;
+    z-index: -1;
+    animation: gradientBackground 10s infinite alternate;
+}
+
+@keyframes gradientBackground {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+/* --- Анимация появления --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.event-detail .container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+    .event-detail {
+        padding: 40px 15px;
+    }
+
+    .event-header h2 {
+        font-size: 2rem;
+    }
+
+    .event-description {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .event-description p {
+        font-size: 1rem;
+    }
+
+    .event-images {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .event-image {
+        height: 200px;
+    }
+
+    .event-detail .back-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-detail {
+        padding: 30px 15px;
+    }
+
+    .event-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .event-description {
+        padding: 15px;
+    }
+
+    .event-image {
+        height: 180px;
+    }
+}

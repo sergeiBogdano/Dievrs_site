@@ -1,0 +1,390 @@
+/* ========================================
+   СТРАНИЦА "ОБОРУДОВАНИЕ" — LIQUID GLASS
+   ======================================== */
+
+/* 🎬 HERO */
+.equipment-hero {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.equipment-hero:not([style*="background-image"]) {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
+}
+
+.equipment-hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 22, 40, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px;
+    max-width: 900px;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--text), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+/* 🔍 ФИЛЬТР - КРАСИВЫЙ */
+.filter-section {
+    padding: 40px 4vw;
+    margin-bottom: 32px;
+}
+
+.filter-box {
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 217, 255, 0.05));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 217, 255, 0.2);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.filter-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.filter-header i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.5));
+}
+
+.filter-header h3 {
+    font-size: 1.8rem;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.filter-subtitle {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.filter-form {
+    display: flex;
+    justify-content: center;
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+}
+
+.category-select {
+    width: 100%;
+    padding: 18px 55px 18px 28px;
+    font-size: 1.05rem;
+    color: var(--text);
+    background: rgba(10, 22, 40, 0.8);
+    border: 2px solid rgba(0, 217, 255, 0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.category-select:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow),
+                0 6px 24px rgba(0, 217, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.category-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow),
+                0 8px 28px rgba(0, 217, 255, 0.4);
+    background-color: rgba(10, 22, 40, 0.95);
+}
+
+.select-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 1.1rem;
+    pointer-events: none;
+    transition: transform 0.3s;
+}
+
+.category-select:focus + .select-icon {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Стили для выпадающего списка */
+.category-select option {
+    background: #0a1628;
+    color: #ffffff;
+    padding: 16px 20px;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.category-select option:hover {
+    background: #0d2137;
+}
+
+.category-select option:first-child {
+    background: #1a3a5c;
+    color: var(--accent);
+    font-weight: 600;
+    font-style: italic;
+}
+
+.category-select option:checked {
+    background: linear-gradient(90deg, rgba(0, 217, 255, 0.4), rgba(0, 217, 255, 0.2));
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .filter-box {
+        padding: 40px 24px;
+    }
+
+    .filter-header i {
+        font-size: 2.5rem;
+    }
+
+    .filter-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .filter-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .category-select {
+        padding: 16px 50px 16px 24px;
+        font-size: 1rem;
+    }
+
+    .select-icon {
+        right: 18px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-box {
+        padding: 32px 20px;
+    }
+
+    .filter-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* 📦 СПИСОК */
+.equipment-list {
+    padding: 32px 4vw 80px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    margin-bottom: 40px;
+}
+
+.equipment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4vw;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.equipment-card {
+    background: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.equipment-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 217, 255, 0.4);
+}
+
+/* МАЛЕНЬКИЕ КАРТИНКИ */
+.equipment-image-wrapper {
+    position: relative;
+    height: 150px; /* ЕЩЁ МЕНЬШЕ! */
+    overflow: hidden;
+}
+
+.equipment-image,
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.placeholder-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: var(--glass-medium);
+}
+
+.equipment-image {
+    transition: 0.4s ease;
+}
+
+.equipment-card:hover .equipment-image {
+    transform: scale(1.08);
+}
+
+.equipment-info {
+    padding: 16px; /* ЕЩЁ МЕНЬШЕ */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.equipment-info h3 {
+    font-size: 1.1rem; /* МЕНЬШЕ */
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.equipment-info p {
+    font-size: 0.85rem; /* МЕНЬШЕ */
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    flex-grow: 1;
+}
+
+.equipment-info .cta-button {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    align-self: flex-start;
+}
+
+/* Placeholder */
+.placeholder {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 60px 40px;
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
+}
+
+/* 📱 АДАПТИВНОСТЬ */
+@media (max-width: 768px) {
+    .equipment-hero {
+        height: 350px;
+    }
+
+    .hero-content {
+        padding: 30px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .filter-section,
+    .equipment-list {
+        padding: 24px 4vw;
+    }
+
+    .filter-box {
+        padding: 24px;
+    }
+
+    .custom-select {
+        max-width: 100%;
+    }
+
+    .equipment-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .equipment-image-wrapper {
+        height: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .equipment-hero {
+        height: 300px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .equipment-info {
+        padding: 14px;
+    }
+
+    .equipment-info h3 {
+        font-size: 1rem;
+    }
+
+    .equipment-info .cta-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

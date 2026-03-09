@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ about_page.title }} - Дайверы{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- 🎬 HERO СЕКЦИЯ -->
+<section class="about-hero scroll-reveal">
+    <div class="about-container">
+        <h1>{{ about_page.title }}</h1>
+        <p class="introduction">{{ about_page.introduction }}</p>
+    </div>
+</section>
+
+<!-- 👥 КОМАНДА -->
+<section class="team-section scroll-reveal">
+    <div class="about-container">
+        <h2>Наша команда</h2>
+        <p class="team-description">{{ about_page.team_description }}</p>
+
+        <!-- Фото команды -->
+        {% if about_page.team_photo %}
+            <div class="team-photo-wrapper glass">
+                <img src="{{ about_page.team_photo.url }}" alt="Наша команда" class="team-photo">
+            </div>
+        {% endif %}
+
+        <!-- Инструкторы -->
+        <div class="instructors-grid">
+            {% for instructor in about_page.instructors.all %}
+                <div class="instructor-card glass">
+                    <div class="image-wrapper" onclick="openImageModal('{{ instructor.avatar.url }}')">
+                        {% if instructor.avatar %}
+                            <img src="{{ instructor.avatar.url }}" alt="{{ instructor.name }}" class="instructor-avatar">
+                        {% else %}
+                            <div class="placeholder-avatar">🤿</div>
+                        {% endif %}
+                        <div class="image-overlay"></div>
+                    </div>
+                    <h3>{{ instructor.name }}</h3>
+                    <p>{{ instructor.bio|truncatechars:150 }}</p>
+                    <a href="{% url 'training' %}" class="cta-button">Записаться на курс</a>
+                </div>
+            {% empty %}
+                <p class="placeholder">Пока нет информации об инструкторах.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 🎯 МИССИЯ -->
+<section class="mission-section scroll-reveal">
+    <div class="about-container">
+        <h2>Наша миссия</h2>
+
+        <div class="mission-content glass">
+            {% if about_page.mission_image %}
+                <div class="mission-image">
+                    <img src="{{ about_page.mission_image.url }}" alt="Наша миссия">
+                </div>
+            {% elif about_page.mission_photo %}
+                <div class="mission-image">
+                    <img src="{{ about_page.mission_photo.url }}" alt="Наша миссия">
+                </div>
+            {% endif %}
+
+            <div class="mission-text">
+                {{ about_page.mission_statement|linebreaks }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ⚙️ УСЛУГИ -->
+<section class="services-section scroll-reveal">
+    <div class="about-container">
+        <h2>Наши услуги</h2>
+
+        {% if about_page.services_image %}
+            <div class="services-image-wrapper glass">
+                <img src="{{ about_page.services_image.url }}" alt="Наши услуги" class="services-image">
+            </div>
+        {% endif %}
+
+        <div class="services-list glass">
+            {{ about_page.services|linebreaks }}
+        </div>
+    </div>
+</section>
+
+<!-- 📞 КОНТАКТЫ -->
+<section class="contact-section scroll-reveal">
+    <div class="about-container">
+        <h2>Связь с нами</h2>
+        <p>{{ about_page.contact_info }}</p>
+
+        <!-- Контакты из JSON -->
+        {% if about_page.social_links %}
+            <div class="contact-details glass">
+                {% with social=about_page.social_links.contact_info %}
+                    {% if social.phone %}
+                        <p><strong>📞 Телефон:</strong> <a href="tel:{{ social.phone }}">{{ social.phone }}</a></p>
+                    {% endif %}
+                    {% if social.email %}
+                        <p><strong>✉️ Email:</strong> <a href="mailto:{{ social.email }}">{{ social.email }}</a></p>
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Соцсети -->
+                {% if about_page.social_links.contact_info.social_media %}
+                    <div class="social-links">
+                        {% with sm=about_page.social_links.contact_info.social_media %}
+                            {% if sm.facebook %}
+                                <a href="{{ sm.facebook }}" target="_blank" class="social-link">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            {% endif %}
+                            {% if sm.instagram %}
+                                <a href="{{ sm.instagram }}" target="_blank" class="social-link">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            {% endif %}
+                            {% if sm.vk %}
+                                <a href="{{ sm.vk }}" target="_blank" class="social-link">
+                                    <i class="fab fa-vk"></i>
+                                </a>
+                            {% endif %}
+                            {% if sm.youtube %}
+                                <a href="{{ sm.youtube }}" target="_blank" class="social-link">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <a href="{% url 'contacts' %}" class="cta-button">Написать нам</a>
+    </div>
+</section>
+
+<!-- Модальное окно для фото -->
+<div id="image-modal" class="modal">
+    <button class="close-modal" onclick="closeImageModal()">&times;</button>
+    <img id="modal-img" src="" alt="Фото">
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

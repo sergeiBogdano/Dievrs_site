@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ equipment.name }} - Оборудование{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/equipment_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="equipment-detail">
+    <div class="container">
+        <a href="{% url 'equipment_list' %}" class="back-button">← Вернуться назад</a>
+
+        <div class="equipment-content">
+            <div class="equipment-image-wrapper">
+                <img src="{{ equipment.image.url }}" alt="{{ equipment.name }}" class="equipment-image">
+            </div>
+
+            <div class="equipment-info">
+                <h1>{{ equipment.name }}</h1>
+                <p class="description">{{ equipment.description|linebreaks }}</p>
+
+                <h2>Подробное описание</h2>
+                <p class="detailed-description">{{ equipment.detailed_description|default:"Подробное описание отсутствует."|linebreaks }}</p>
+
+                <!-- Кнопки действий -->
+                <div class="equipment-actions">
+                    <a href="{% url 'contacts' %}" class="cta-button primary">Заказать</a>
+                    <a href="{% url 'equipment_list' %}" class="cta-button secondary">Все оборудование</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

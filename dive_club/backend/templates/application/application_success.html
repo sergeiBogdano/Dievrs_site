@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Заявка отправлена!{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/application_success.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="success-section">
+    <div class="success-container">
+        <div class="success-icon">✓</div>
+        <h1>Заявка отправлена!</h1>
+        <p>Спасибо за вашу заявку. Мы свяжемся с вами в ближайшее время.</p>
+
+        <div class="success-actions">
+            <a href="{% url 'home' %}" class="cta-button">На главную</a>
+            <a href="{% url 'contacts' %}" class="back-button">Контакты</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

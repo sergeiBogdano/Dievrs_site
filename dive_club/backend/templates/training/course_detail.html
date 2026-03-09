@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ course.title }} - Дайверы{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/course_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- 🔙 НАЗАД + ЗАГОЛОВОК -->
+<section class="course-hero scroll-reveal">
+    <div class="course-container">
+        <a href="{% url 'training' %}" class="back-button glass">
+            <i class="fas fa-arrow-left"></i> Назад
+        </a>
+        <h1>{{ course.title }}</h1>
+        <p class="course-description">{{ course.description }}</p>
+    </div>
+</section>
+
+<!-- 📋 ЧТО ВХОДИТ -->
+<section class="course-included scroll-reveal">
+    <div class="course-container">
+        <div class="included-box glass">
+            <h2>Что входит в курс</h2>
+            <div class="included-content">
+                {{ course.included|linebreaks }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 📸 ГАЛЕРЕЯ -->
+{% if course.images.all %}
+<section class="course-gallery scroll-reveal">
+    <div class="course-container">
+        <h2>{{ course.section_gallery_title }}</h2>
+        <div class="gallery-grid">
+            {% for image in course.images.all %}
+                <div class="gallery-item glass" onclick="openImageModal('{{ image.image.url }}')">
+                    <img src="{{ image.image.url }}" alt="{{ course.title }}">
+                    <div class="image-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 🎥 ВИДЕО -->
+{% if course.videos.all %}
+<section class="course-videos scroll-reveal">
+    <div class="course-container">
+        <h2>{{ course.section_video_title }}</h2>
+        <div class="videos-grid">
+            {% for video in course.videos.all %}
+                <div class="video-item glass">
+                    <video controls>
+                        <source src="{{ video.video.url }}" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 📞 CTA -->
+<section class="course-cta scroll-reveal">
+    <div class="course-container">
+        <div class="cta-box glass">
+            <h2>{{ course.cta_title }}</h2>
+            <p>{{ course.cta_description }}</p>
+            <a href="{% url 'contacts' %}" class="cta-button">Отправить заявку</a>
+        </div>
+    </div>
+</section>
+
+<!-- Модальное окно -->
+<div id="image-modal" class="modal">
+    <button class="close-modal" onclick="closeImageModal()">&times;</button>
+    <img id="modal-img" src="" alt="Фото">
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

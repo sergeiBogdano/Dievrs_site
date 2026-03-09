@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Оборудование - Дайверы{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/equipment_list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- 🎬 HERO -->
+<section class="equipment-hero" {% if equipment_page_content.background_photo %}style="background-image: url('{{ equipment_page_content.background_photo.url }}');"{% endif %}>
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h1>{{ equipment_page_content.title|default:"Оборудование для дайвинга" }}</h1>
+        <p>{{ equipment_page_content.description|default:"Профессиональное снаряжение" }}</p>
+    </div>
+</section>
+
+<!-- 🔍 ФИЛЬТР -->
+{% if equipment_categories %}
+<section class="filter-section">
+    <div class="equipment-container">
+        <div class="filter-box glass">
+            <div class="filter-header">
+                <i class="fas fa-filter-circle"></i>
+                <h3>Фильтр оборудования</h3>
+                <p class="filter-subtitle">Выберите категорию для поиска</p>
+            </div>
+
+            <form method="GET" action="{% url 'equipment_list' %}" class="filter-form">
+                <div class="select-wrapper">
+                    <select name="category" class="category-select" onchange="this.form.submit()">
+                        <option value="" disabled {% if not request.GET.category %}selected{% endif %}>
+                            Выберите категорию
+                        </option>
+                        <option value="">Все категории</option>
+                        {% for category in equipment_categories %}
+                            <option value="{{ category.name }}" {% if request.GET.category == category.name %}selected{% endif %}>
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <div class="select-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 📦 СПИСОК -->
+<section class="equipment-list">
+    <div class="equipment-container">
+        <h2 class="section-title">Наше оборудование</h2>
+
+        <div class="equipment-grid">
+            {% for eq in equipment_list %}
+                <div class="equipment-card glass">
+                    <div class="equipment-image-wrapper">
+                        {% if eq.image %}
+                            <img src="{{ eq.image.url }}" alt="{{ eq.name }}" class="equipment-image">
+                        {% else %}
+                            <div class="placeholder-image">🤿</div>
+                        {% endif %}
+                    </div>
+                    <div class="equipment-info">
+                        <h3>{{ eq.name }}</h3>
+                        <p>{{ eq.description|truncatechars:120|default:"Нет описания" }}</p>
+                        <a href="{% url 'equipment_detail' eq.id %}" class="cta-button">Подробнее</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="placeholder">Пока нет оборудования</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

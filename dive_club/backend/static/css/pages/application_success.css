@@ -1,0 +1,188 @@
+/* ========================================
+   СТРАНИЦА УСПЕХА ЗАЯВКИ (application_success.css)
+   ======================================== */
+
+/* --- Секция подтверждения --- */
+.success-section {
+    padding: 80px 20px;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.success-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--glass-effect);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 50px 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.success-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    position: relative;
+    display: inline-block;
+}
+
+.success-container h1::after {
+    content: '✓';
+    position: absolute;
+    top: -10px;
+    right: -40px;
+    font-size: 2rem;
+    color: #81c784;
+    background: rgba(129, 199, 132, 0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-container p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: var(--text-color-light);
+}
+
+/* --- Иконка успеха --- */
+.success-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px auto;
+    background: rgba(129, 199, 132, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #81c784;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(129, 199, 132, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(129, 199, 132, 0);
+    }
+}
+
+/* --- Кнопки действий --- */
+.success-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.success-actions .cta-button,
+.success-actions .back-button {
+    min-width: 180px;
+}
+
+/* --- Фоновая анимация --- */
+.success-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        var(--primary-color),
+        var(--secondary-color),
+        var(--accent-color)
+    );
+    opacity: 0.1;
+    z-index: -1;
+    animation: gradientBackground 10s infinite alternate;
+}
+
+@keyframes gradientBackground {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+    .success-section {
+        padding: 60px 15px;
+    }
+
+    .success-container {
+        padding: 40px 25px;
+        border-radius: 20px;
+    }
+
+    .success-container h1 {
+        font-size: 2rem;
+    }
+
+    .success-container h1::after {
+        position: static;
+        display: block;
+        margin: 20px auto 0 auto;
+    }
+
+    .success-container p {
+        font-size: 1.1rem;
+    }
+
+    .success-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .success-actions .cta-button,
+    .success-actions .back-button {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .success-section {
+        padding: 40px 15px;
+        min-height: 50vh;
+    }
+
+    .success-container {
+        padding: 30px 20px;
+    }
+
+    .success-container h1 {
+        font-size: 1.6rem;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+    }
+}

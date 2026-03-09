@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Галерея - Дайверы{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/gallery.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- 🎬 HERO -->
+<section class="gallery-hero">
+    <div class="gallery-container">
+        <h1>📸 Галерея</h1>
+        <p>Фотографии наших погружений и мероприятий</p>
+    </div>
+</section>
+
+<!-- 🖼️ ГАЛЕРЕЯ -->
+<section class="gallery-section">
+    <div class="gallery-container">
+        <div class="gallery-grid">
+            {% for image in images %}
+                {% if image.image %}
+                    <div class="gallery-item glass" onclick="openModal('{{ image.image.url }}', {{ forloop.counter }}, {{ images|length }})">
+                        <img src="{{ image.image.url }}" alt="Фото {{ forloop.counter }}" class="gallery-thumbnail">
+                        <div class="image-overlay">
+                            <span>🔍</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+                <p class="placeholder">В галерее пока нет фотографий</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 🔍 МОДАЛЬНОЕ ОКНО -->
+<div id="gallery-modal" class="modal">
+    <div class="modal-overlay" onclick="closeModal()"></div>
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-modal" onclick="closeModal()" title="Закрыть (Esc)">
+            ✕
+        </button>
+
+        <button class="nav-btn prev" onclick="changeImage(-1)" title="Предыдущее (←)">
+            ‹
+        </button>
+
+        <img id="modal-image" src="" alt="Фото" />
+
+        <button class="nav-btn next" onclick="changeImage(1)" title="Следующее (→)">
+            ›
+        </button>
+
+        <div class="image-counter">
+            <span id="current-image">1</span> / <span id="total-images">{{ images|length }}</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let currentIndex = 1;
+let totalImages = {{ images|length }};
+
+function openModal(imageUrl, index, total) {
+    document.getElementById('modal-image').src = imageUrl;
+    document.getElementById('current-image').textContent = index;
+    document.getElementById('total-images').textContent = total;
+    document.getElementById('gallery-modal').classList.add('active');
+    currentIndex = index;
+    totalImages = total;
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('gallery-modal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+function changeImage(direction) {
+    currentIndex += direction;
+    if (currentIndex < 1) currentIndex = totalImages;
+    if (currentIndex > totalImages) currentIndex = 1;
+
+    const images = document.querySelectorAll('.gallery-thumbnail');
+    if (images[currentIndex - 1]) {
+        document.getElementById('modal-image').src = images[currentIndex - 1].src;
+        document.getElementById('current-image').textContent = currentIndex;
+    }
+}
+
+// Закрытие по клику на overlay
+document.querySelector('.modal-overlay').addEventListener('click', closeModal);
+
+// Закрытие по ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+});
+</script>
+{% endblock %}

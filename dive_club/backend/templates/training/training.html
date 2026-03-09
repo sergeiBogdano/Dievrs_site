@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ training.title }} - Дайверы{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/training.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- 🎬 HERO -->
+<section class="training-hero scroll-reveal">
+    <div class="training-container">
+        <h1>{{ training.title }}</h1>
+        <p class="training-description">{{ training.description }}</p>
+    </div>
+</section>
+
+<!-- 📚 КУРСЫ -->
+<section class="courses-section scroll-reveal">
+    <div class="training-container">
+        <h2 class="section-title">Наши курсы</h2>
+
+        <div class="course-grid">
+            {% for course in courses %}
+                <!-- Заголовок категории (только при смене) -->
+                {% ifchanged course.course_category %}
+                    <div class="category-header">
+                        <h3>
+                            {% for value, label in category_choices %}
+                                {% if value == course.course_category %}
+                                    {{ label }}
+                                {% endif %}
+                            {% endfor %}
+                        </h3>
+                    </div>
+                {% endifchanged %}
+
+                <!-- Карточка курса -->
+                <div class="course-card glass">
+                    <h4>{{ course.title }}</h4>
+                    <p>{{ course.description|truncatewords:25 }}</p>
+                    <a href="{% url 'course_detail' course.id %}" class="cta-button">Подробнее</a>
+                </div>
+            {% empty %}
+                <p class="placeholder">Пока нет доступных курсов</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ⭐ ПРЕИМУЩЕСТВА -->
+<section class="advantages-section scroll-reveal">
+    <div class="training-container">
+        <h2 class="section-title">Преимущества обучения</h2>
+        <div class="advantages-content glass">
+            <div class="advantages-grid">
+                {{ training.advantages|linebreaks }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 📞 CTA -->
+<section class="training-cta scroll-reveal">
+    <div class="training-container">
+        <div class="cta-box glass">
+            <h2>Готовы начать?</h2>
+            <p>Запишитесь на курс прямо сейчас и откройте для себя подводный мир!</p>
+            <a href="{% url 'contacts' %}" class="cta-button">Записаться на курс</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

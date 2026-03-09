@@ -1,0 +1,252 @@
+/* ========================================
+   СТРАНИЦА "ОБУЧЕНИЕ" — LIQUID GLASS
+   Исправленные отступы и группировка
+   ======================================== */
+
+/* Floating animation */
+.training-hero,
+.courses-section,
+.advantages-section,
+.training-cta {
+    animation: float 6s ease-in-out infinite;
+}
+
+.training-hero { animation-delay: 0s; }
+.courses-section { animation-delay: 0.5s; }
+.advantages-section { animation-delay: 1s; }
+.training-cta { animation-delay: 1.5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Контейнер */
+.training-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4vw;
+}
+
+/* 🎬 HERO - КОМПАКТНЫЙ */
+.training-hero {
+    text-align: center;
+    padding: 40px 4vw 30px; /* УМЕНЬШИЛ! */
+}
+
+.training-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--text), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.training-description {
+    font-size: 1.15rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-light);
+}
+
+/* 📚 КУРСЫ */
+.courses-section {
+    padding: 32px 4vw;
+    margin-bottom: 16px; /* УМЕНЬШИЛ! */
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* Заголовок категории */
+.category-header {
+    grid-column: 1 / -1;
+    margin: 40px 0 16px;
+    padding: 16px 24px;
+    background: var(--glass-medium);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+}
+
+.category-header h3 {
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Карточка курса */
+.course-card {
+    background: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 217, 255, 0.4);
+}
+
+.course-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.course-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.course-card .cta-button {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    align-self: flex-start;
+}
+
+/* ⭐ ПРЕИМУЩЕСТВА - СО СТЕКЛОМ */
+.advantages-section {
+    padding: 40px 4vw;
+    margin-bottom: 16px;
+}
+
+.advantages-content {
+    background: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 40px;
+}
+
+.advantages-grid {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text-light);
+}
+
+.advantages-grid strong {
+    color: var(--accent);
+    display: block;
+    margin: 24px 0 8px;
+    font-size: 1.1rem;
+}
+
+/* 📞 CTA - СО СТЕКЛОМ */
+.training-cta {
+    padding: 40px 4vw 80px;
+}
+
+.cta-box {
+    background: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 60px 40px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-box h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--text), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cta-box p {
+    max-width: 600px;
+    margin: 0 auto 32px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.cta-box .cta-button {
+    padding: 16px 48px;
+    font-size: 1.1rem;
+}
+
+/* 📱 АДАПТИВНОСТЬ */
+@media (max-width: 768px) {
+    .training-hero {
+        padding: 32px 4vw 24px;
+    }
+
+    .training-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .courses-section,
+    .advantages-section {
+        padding: 24px 4vw;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-header {
+        padding: 12px 20px;
+    }
+
+    .category-header h3 {
+        font-size: 1.4rem;
+    }
+
+    .course-card {
+        padding: 24px;
+    }
+
+    .advantages-content {
+        padding: 28px;
+    }
+
+    .cta-box {
+        padding: 40px 24px;
+    }
+
+    .training-cta {
+        padding: 32px 4vw 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .training-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .course-card .cta-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cta-box .cta-button {
+        width: 100%;
+        padding: 14px 32px;
+    }
+}
